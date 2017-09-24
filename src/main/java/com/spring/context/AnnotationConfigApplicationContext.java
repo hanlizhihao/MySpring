@@ -3,6 +3,7 @@ package com.spring.context;
 import com.spring.annotation.ComponentScan;
 import com.spring.util.ClassUtil;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,11 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Administrator 
  * @create 2017-9-6 0:39:27
  */
+
 public class AnnotationConfigApplicationContext implements ApplicationContext{
 
-    private Map<String, Object> objectMap = new ConcurrentHashMap<String, Object>();
+    private Map<String, Object> objectMap = new ConcurrentHashMap<>();
 
-    private Map<String, Class> classMap = new ConcurrentHashMap<String, Class>();
+    private Map<String, Class> classMap = new ConcurrentHashMap<>();
 
     @Override
     public Object getBean(String beanName) {
@@ -29,13 +31,17 @@ public class AnnotationConfigApplicationContext implements ApplicationContext{
     @Override
     public void initApplicationContext(Class<?> config) {
         if (ClassUtil.isConfigurationClass(config)) {
+            System.out.println("Component is Configuration");
             ComponentScan componentScan = ClassUtil.getComponentScanAnnotation(config);
+            Class<?>[] basePackagesClass = componentScan.basePackageClasses();
+            for (int i=0;i<basePackagesClass.length;i++) {
 
+            }
         }
     }
 
-    AnnotationConfigApplicationContext(Class<?> config) {
-
+    public AnnotationConfigApplicationContext(Class<?> config) {
+        initApplicationContext(config);
     }
 
 }
