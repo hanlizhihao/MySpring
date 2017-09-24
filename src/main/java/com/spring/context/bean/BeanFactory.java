@@ -18,4 +18,5 @@ public interface BeanFactory {
 
     boolean isSingleton(String name) throws NoSuchBeanDefinitionException;
 
+    NamedBeanHolder<?> createBean(Class<?> clz);
 }
