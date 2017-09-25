@@ -2,6 +2,7 @@ package com.spring.context.bean;
 
 import com.spring.context.exception.BeansException;
 import com.spring.context.exception.NoSuchBeanDefinitionException;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.naming.NameAlreadyBoundException;
 import java.util.HashMap;
@@ -12,9 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author hanlizhi
  * @time 2017/9/24 22:39
  */
+@Slf4j
 public class GenericBeanFactory implements BeanFactory {
 
-    private Map<String, NamedBeanHolder> map = new ConcurrentHashMap<>(10);
+    private Map<String, Object> map = new ConcurrentHashMap<>(10);
 
     private GenericBeanFactory() {
 
@@ -54,16 +56,15 @@ public class GenericBeanFactory implements BeanFactory {
     }
 
     @Override
-    public NamedBeanHolder<?> createBean(Class<?> clz) {
-        NamedBeanHolder beanHolder = null;
+    public void createBean(Class<?> clz) {
         try {
             if (clz == null) {
-                throw new BeansException(clz.getSimpleName() + "is null");
+                throw new BeansException("GenericBeanFactory create bean error");
             }
-            beanHolder = (NamedBeanHolder) clz.newInstance();
+            map.put(clz.getName(), clz.newInstance());
+            log.info("Bean Name"+clz.getName());
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            log.error("GenericBeanFactory create Bean", e);
         }
-        return beanHolder;
     }
 }
