@@ -61,7 +61,7 @@ public class GenericBeanFactory implements BeanFactory {
             if (clz == null) {
                 throw new BeansException("GenericBeanFactory create bean error");
             }
-            map.put(clz.getName(), clz.newInstance());
+            map.put(clz.getSimpleName(), clz.newInstance());
             log.info("Bean Name"+clz.getName());
         } catch (InstantiationException | IllegalAccessException e) {
             log.error("GenericBeanFactory create Bean", e);

@@ -2,7 +2,6 @@ package com.spring.util;
 
 import com.spring.annotation.ComponentScan;
 import com.spring.annotation.Configuration;
-import com.sun.istack.internal.NotNull;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,12 +19,12 @@ public class ClassUtil {
         return configClass.getAnnotation(Configuration.class) != null;
     }
 
-    public static ComponentScan getComponentScanAnnotation(@NotNull Class<?> configClass) {
+    public static ComponentScan getComponentScanAnnotation( Class<?> configClass) {
         return configClass.getAnnotation(ComponentScan.class);
     }
 
     public static ConcurrentHashMap<String, Object> getObjectMapByComponentScan(ComponentScan componentScan) {
-        ConcurrentHashMap<String, Object> objectConcurrentHashMap = new ConcurrentHashMap<String, Object>();
+        ConcurrentHashMap<String, Object> objectConcurrentHashMap = new ConcurrentHashMap<>();
         return null;
     }
 
