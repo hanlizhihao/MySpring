@@ -1,7 +1,7 @@
 package com.test.ioc;
 
-import com.spring.annotation.Autowired;
-import com.spring.annotation.Component;
+import com.spring.context.annotation.Autowired;
+import com.spring.context.annotation.Component;
 
 /**
  * @author hanlizhi

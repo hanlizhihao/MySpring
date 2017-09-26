@@ -1,6 +1,6 @@
 package com.test.aop;
 
-import com.spring.annotation.Component;
+import com.spring.context.annotation.Component;
 import com.spring.aop.annotation.After;
 import com.spring.aop.annotation.Aspect;
 import com.spring.aop.annotation.Before;

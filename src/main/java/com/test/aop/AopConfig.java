@@ -1,7 +1,7 @@
 package com.test.aop;
 
-import com.spring.annotation.ComponentScan;
-import com.spring.annotation.Configuration;
+import com.spring.context.annotation.ComponentScan;
+import com.spring.context.annotation.Configuration;
 
 /**
  * @author hanlizhi

@@ -1,20 +1,16 @@
 package com.spring.context;
 
-import com.spring.annotation.Autowired;
-import com.spring.annotation.ComponentScan;
+import com.spring.context.annotation.Autowired;
+import com.spring.context.annotation.ComponentScan;
 import com.spring.aop.AopContext;
 import com.spring.aop.annotation.Aspect;
 import com.spring.context.bean.BeanFactory;
 import com.spring.context.bean.GenericBeanFactory;
 import com.spring.util.ClassUtil;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Administrator 

@@ -1,4 +1,4 @@
-package com.spring.annotation;
+package com.spring.context.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
