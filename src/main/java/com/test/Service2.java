@@ -1,6 +1,9 @@
 package com.test;
 
+import com.spring.annotation.Autowired;
 import com.spring.annotation.Component;
+
+import javax.xml.ws.Service;
 
 /**
  * @author hanlizhi
@@ -8,4 +11,11 @@ import com.spring.annotation.Component;
  */
 @Component
 public class Service2 {
+
+    @Autowired
+    private Service1 service1;
+
+    public void test(){
+        if (service1!=null) service1.test();
+    }
 }

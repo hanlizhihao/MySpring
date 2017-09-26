@@ -32,7 +32,7 @@ public class GenericBeanFactory implements BeanFactory {
 
     @Override
     public Object getBean(String name) throws BeansException {
-        return null;
+        return map.get(name);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class GenericBeanFactory implements BeanFactory {
                 throw new BeansException("GenericBeanFactory create bean error");
             }
             map.put(clz.getSimpleName(), clz.newInstance());
-            log.info("Bean Name"+clz.getName());
+            log.info("Create Bean:"+clz.getName());
         } catch (InstantiationException | IllegalAccessException e) {
             log.error("GenericBeanFactory create Bean", e);
         }

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
-
+        Service2 service2 = (Service2) context.getBean("Service2");
+        service2.test();
     }
 }
