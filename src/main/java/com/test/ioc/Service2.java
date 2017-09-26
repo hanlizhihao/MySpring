@@ -1,9 +1,7 @@
-package com.test;
+package com.test.ioc;
 
 import com.spring.annotation.Autowired;
 import com.spring.annotation.Component;
-
-import javax.xml.ws.Service;
 
 /**
  * @author hanlizhi

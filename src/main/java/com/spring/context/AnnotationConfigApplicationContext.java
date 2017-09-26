@@ -2,6 +2,8 @@ package com.spring.context;
 
 import com.spring.annotation.Autowired;
 import com.spring.annotation.ComponentScan;
+import com.spring.aop.AopContext;
+import com.spring.aop.annotation.Aspect;
 import com.spring.context.bean.BeanFactory;
 import com.spring.context.bean.GenericBeanFactory;
 import com.spring.util.ClassUtil;
@@ -9,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +24,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AnnotationConfigApplicationContext implements ApplicationContext{
 
     private BeanFactory genericBeanFactory;
+
+    private AopContext aopContext;
+
+    private ArrayList<Class> aspectClass;
 
     @Override
     public Object getBean(String beanName) {
@@ -35,12 +42,17 @@ public class AnnotationConfigApplicationContext implements ApplicationContext{
     @Override
     public void initApplicationContext(Class<?> config) {
         genericBeanFactory = GenericBeanFactory.getInstance();
+        aspectClass = new ArrayList<>();
+
         if (ClassUtil.isConfigurationClass(config)) {
             log.info("s");
             ComponentScan componentScan = ClassUtil.getComponentScanAnnotation(config);
             Class<?>[] basePackagesClass = componentScan.basePackageClasses();
-            for (Class<?> basePackagesClas : basePackagesClass) {
-                genericBeanFactory.createBean(basePackagesClas);
+            for (Class<?> baseClass : basePackagesClass) {
+                genericBeanFactory.createBean(baseClass);
+                if (isAspectAnnotaedClass(baseClass)) {
+                    aspectClass.add(baseClass);
+                }
             }
             try {
                 autoWired(basePackagesClass);
@@ -48,6 +60,8 @@ public class AnnotationConfigApplicationContext implements ApplicationContext{
                 log.error("Application Context Init Exception",e);
                 System.exit(0);
             }
+            aopContext = AopContext.getInstance();
+            aopContext.startContextByAspectClass(aspectClass.get(0), genericBeanFactory.getMap());
         }
     }
 
@@ -73,6 +87,12 @@ public class AnnotationConfigApplicationContext implements ApplicationContext{
             }
         }
         log.info("Autowired Success");
+    }
+
+    //接受一个class，判断是否有@Aspect
+    private boolean isAspectAnnotaedClass(Class<?> clz) {
+        Aspect annotation = clz.getAnnotation(Aspect.class);
+        return annotation != null;
     }
 
 }
