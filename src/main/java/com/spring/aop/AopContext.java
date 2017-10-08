@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class AopContext {
 
-    String needProxyClassKey;
+    private String needProxyClassKey;
 
     public static AopContext getInstance(){
         return AopContextHolder.aop;
@@ -47,8 +47,8 @@ public class AopContext {
         log.info(targetAnnotations.getName());
         for (Map.Entry<String, Object> entry:beans.entrySet()) {
             Object value = entry.getValue();
-            Method[] tempMethos = value.getClass().getDeclaredMethods();
-            if (Stream.of(tempMethos).anyMatch(method -> method.getAnnotation(targetAnnotations)!=null)) {
+            Method[] tempMethod = value.getClass().getDeclaredMethods();
+            if (Stream.of(tempMethod).anyMatch(method -> method.getAnnotation(targetAnnotations)!=null)) {
                 proxyFactoryBean.setTarget(value);
                 needProxyClassKey = entry.getKey();
             }
