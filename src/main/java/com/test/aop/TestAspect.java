@@ -17,7 +17,6 @@ public class TestAspect {
 
     @Pointcut(targetAnnotation = TestPointcut.class)
     public void pointcut() {
-
     }
 
     @Before("pointcut()")

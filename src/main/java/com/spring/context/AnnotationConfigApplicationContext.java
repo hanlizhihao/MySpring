@@ -41,7 +41,7 @@ public class AnnotationConfigApplicationContext implements ApplicationContext{
         aspectClass = new ArrayList<>();
 
         if (ClassUtil.isConfigurationClass(config)) {
-            log.info("s");
+            log.info(config.getName()+"is Config Class");
             ComponentScan componentScan = ClassUtil.getComponentScanAnnotation(config);
             Class<?>[] basePackagesClass = componentScan.basePackageClasses();
             for (Class<?> baseClass : basePackagesClass) {

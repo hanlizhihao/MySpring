@@ -19,8 +19,10 @@ import java.lang.reflect.Proxy;
 @Slf4j
 public class ProxyFactoryBean {
 
+    //切面类，@Aspect注解的类
     private Class<?> aspectClass;
 
+    //被代理类
     private Object target;
 
     private Method beforeMethod;

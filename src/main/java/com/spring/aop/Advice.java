@@ -6,5 +6,7 @@ package com.spring.aop;
  */
 
 public interface Advice {
-    public void testMethod();
+    void testFirstMethod();
+
+    void testSecondMethod();
 }

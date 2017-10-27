@@ -10,8 +10,15 @@ import com.spring.aop.Advice;
 @Component
 public class Service implements Advice {
 
+    @Override
     @TestPointcut
-    public void testMethod(){
-        System.out.println("testMethod目标方法被执行");
+    public void testFirstMethod() {
+        System.out.println("testFirstMethod目标方法被执行");
+    }
+
+    @TestPointcut
+    @Override
+    public void testSecondMethod() {
+        System.out.println("testThirdMethod目标方法被执行");
     }
 }

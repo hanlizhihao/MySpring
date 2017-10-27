@@ -51,13 +51,14 @@ public class AopContext {
             if (Stream.of(tempMethos).anyMatch(method -> method.getAnnotation(targetAnnotations)!=null)) {
                 proxyFactoryBean.setTarget(value);
                 needProxyClassKey = entry.getKey();
+
             }
         }
         if (proxyFactoryBean.getTarget() == null) {
             log.error(targetAnnotations.getName()+" is not used");
             return;
         }
-
+        beans.remove(needProxyClassKey);
         beans.put(needProxyClassKey, getProxy());
     }
 
